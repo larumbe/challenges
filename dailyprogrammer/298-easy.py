@@ -1,0 +1,42 @@
+# https://www.reddit.com/r/dailyprogrammer/comments/5llkbj/2017012_challenge_298_easy_too_many_parentheses/
+# [298] [Easy] [Too many parenthesis]
+
+# ((a((bc)(de)))f)
+# (((zbcd)(((e)fg))))
+# ab((c))
+
+# ((a((bc)(de)))f)  
+# ((zbcd)((e)fg))
+# ab(c)
+
+def sol(exp):
+    for i in range(0,len(exp)-1):
+        if (exp[i] == ')'):
+            # search the previous '('
+            ind = matching(exp, i)
+            if ((exp[i+1] == ')') and exp[ind-1] == '('):
+                exp2 = exp[:ind-1] + exp[ind:i+1] + exp[i+2:]
+                return sol(exp2)
+    # No changes, return same string (base case)
+    return exp
+                
+
+# exp = "((a(((bc))(de)))f)"
+# sol(exp)
+
+def matching(exp,ind):
+    """
+    Given an expression and a parenthesis, it returns
+    the mathching index
+    """
+    stack = []
+    if exp[ind] != ')':
+        print ("Not a )")
+        return None
+    for i in range(0,ind):
+        if (exp[i] == '('):
+            stack.append(i)
+        elif (exp[i] == ')'):
+            stack.pop()
+    return stack[-1]
+            

@@ -10,20 +10,16 @@
 # ab(c)
 
 def sol(exp):
+    if (exp == "()"): return ""
     for i in range(0,len(exp)-1):
         if (exp[i] == ')'):
-            # search the previous '('
             ind = matching(exp, i)
+            if (exp[ind+1:i] == ''):
+                return sol(exp[:ind]+exp[i+1:])
             if ((exp[i+1] == ')') and exp[ind-1] == '('):
-                exp2 = exp[:ind-1] + exp[ind:i+1] + exp[i+2:]
-                return sol(exp2)
-    # No changes, return same string (base case)
+                return sol(exp[:ind-1] + exp[ind:i+1] + exp[i+2:])
     return exp
                 
-
-# exp = "((a(((bc))(de)))f)"
-# sol(exp)
-
 def matching(exp,ind):
     """
     Given an expression and a parenthesis, it returns
@@ -40,3 +36,4 @@ def matching(exp,ind):
             stack.pop()
     return stack[-1]
             
+sol("()")

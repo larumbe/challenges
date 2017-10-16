@@ -20,8 +20,3 @@ def sumPairFibUntil(until):
         sequence.append(dos)
         dos = sequence[-1] + sequence[-2]
     return sum([x for x in sequence if (x % 2 == 0)])
-            
-        
-    
-        
-    

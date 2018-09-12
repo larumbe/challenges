@@ -5,14 +5,13 @@ import sys
 
 d = dict()
 
-def minimumBribes(q):
+def minimumBribesBT(q):
     # start recursion
     res =  bribeRec(q, [0]*len(q))
     if (res != None):
         print("{}".format(res))
     else:
         print("Too chaotic")
-
 
 # recursife function
 def bribeRec(q, sw):
@@ -39,28 +38,25 @@ def bribeRec(q, sw):
     
     for i in range(len(q)-1):
         if ((sw[q[i]-1]) < 2):
-            # check the table for intermediate results
-            entry = d.get(repr(q))
+            tq = q[:]
+            tsw = sw[:]
+            tsw[tq[i]-1] += 1
+            tq[i], tq[i+1] = tq[i+1], tq[i]
+            
+            entry = d.get(repr(tq+tsw))
             if (entry):
                 res = entry
-            else:
-                tq = q[:]
-                ts = sw[:]
-                ts[tq[i]-1] += 1
-                tq[i], tq[i+1] = tq[i+1], tq[i]
-                res = bribeRec(tq, ts)
-            if (res != None):
-                allNone = False
                 if (res < localmin):
                     localmin = res
-
+            else:
+                res = bribeRec(tq, tsw)
+                if (res != None):
+                    allNone = False
+                    if (res < localmin):
+                        localmin = res
+                        
     if (not(allNone)):
-        # update the dictionary
-        d[repr(q)] = localmin
+        d[repr(q+sw)] = localmin
         return localmin
     else:
         return None
-
-
-
-

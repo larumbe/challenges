@@ -60,3 +60,24 @@ def bribeRec(q, sw):
         return localmin
     else:
         return None
+
+def minimumBribes(q):
+    sw = [0]*len(q)
+    sq = list(range(1,len(q)+1))
+
+    while (q != sq):
+        i = 0
+        while (i < (len(q)-1)):
+            if (q[i] > q[i+1]):
+                if (sw[q[i]-1] < 2):
+                    sw[q[i]-1] += 1
+                    q[i], q[i+1] = q[i+1], q[i]
+                    i += 2
+                else:
+                    print ("Too chaotic")
+                    return
+            else:
+                i += 1
+
+    # there's a minimum swap sequence leading back to the original
+    print("{}".format(sum(sw)))

@@ -1,23 +1,17 @@
 def generateSubstrings(s):
-    sss = []
-
     for i in range(1, len(s)):
         j = 0
         while (j+i < len(s)+1):
-            sss.append(s[j:j+i])
+            yield s[j:j+i]
             j += 1
-    sss.append(s)
-
-    return sss
-
+    yield s
 
 def substrCount(n, s):
-    spalin = []
-
+    count = 0
     for ss in generateSubstrings(s):
         if isSpecialPalindrome(ss):
-            spalin.append(ss)
-    return len(spalin)
+            count += 1
+    return count
 
 
 def isSpecialPalindrome(s):

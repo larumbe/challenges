@@ -3,7 +3,7 @@
 d = dict()
 
 def superDigit(n, k):
-    return superDigitRec(int(str(n)*k))
+    return superDigitRec(sum([int(i) for i in str(n)])*k)
 
 def superDigitRec(n):
     if n < 10:
@@ -15,5 +15,3 @@ def superDigitRec(n):
         e = superDigitRec(s)
         d[s] = e
     return e
-
-    # return superDigitRec(sum([int(i) for i in str(n)]))

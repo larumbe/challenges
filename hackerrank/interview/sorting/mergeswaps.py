@@ -38,5 +38,5 @@ def mergeSort(s):
         srt.extend(s1[i:])
     elif (j < len(s2)):
         srt.extend(s2[j:])
-       
-    return (srt,c)
+      
+    return (srt, c)

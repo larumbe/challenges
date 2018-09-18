@@ -16,8 +16,6 @@ def indexOf(n, s):
     if (s == []):
         return None
     
-
-    
     
 
 def pairs2(k, arr):

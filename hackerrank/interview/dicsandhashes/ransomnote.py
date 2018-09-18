@@ -6,7 +6,7 @@ def checkMagazine(magazine, note):
             d[w] = 1
         else:
             d[w] += 1
-    
+
     for word in note:
         f = d.get(word)
         if (f is None or f == 0):
@@ -14,8 +14,5 @@ def checkMagazine(magazine, note):
             return
         else:
             d[word] -= 1
-        
+
     print("Yes")
-    return
-        
-    

@@ -11,14 +11,23 @@ def pairs(k, arr):
 # sort the list:
 # for every n in sorted(arr):
 
-def indexOf(n, s):
+def indexOf(n, s, b, e):
     """binary search for n"""
-    if (s == []):
+    if (b > e):
         return None
+    if (b >= len(s) or e < 0):
+        return None
+    if (b == e and s[b] == n):
+        return b
     
+    sm = ((e-b) // 2) + b             # sublist midpoint
 
-    
-    
+    if (s[sm] == n):
+        return sm
+    elif (s[sm] > n):
+        return indexOf(n, s, b, sm-1)
+    else:
+        return indexOf(n, s, sm+1, e)
 
 def pairs2(k, arr):
     total = 0
@@ -27,20 +36,20 @@ def pairs2(k, arr):
         a1 = sarr[i] + k
         j = i+1
         while(True):
-            idx = indexOf(a1, sarr[j:])
+            idx = indexOf(a1, sarr, j, len(sarr)-1)
             if (idx is None):
                 break
             total += 1
-            j = j + idx
+            j = idx + 1
 
         a2 = sarr[i] - k
         if (a2 > 0):
             j = i+1
             while (True):
-                idx = indexOf(a2, sarr[j:])
+                idx = indexOf(a2, sarr, j, len(sarr)-1)
                 if (idx is None):
                     break
                 total += 1
-                j = j + idx
+                j = idx + 1
                 
     return total

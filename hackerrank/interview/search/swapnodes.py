@@ -2,10 +2,11 @@
 
 import math
 
-def swapNodesLevel(t, h):
+def swapNodesLevel(tree, h):
     """swaps nodes at height h
     swaps the childre of all nodes at height h"""
-
+    t = tree[::]
+    
     if (h == int(math.log2(len(t)+1)) - 1):
         return t
       
@@ -35,3 +36,10 @@ def inOrder(t, s):
             inOrder(t, (s*2)+2)
 
     return
+
+def swapNodes(indexes, queries):
+    nl = indexes
+    for q in queries:
+        nl = swapNodesLevel(nl, q-1)
+        inOrder(nl, 0)
+        print("")
